@@ -2,6 +2,8 @@
 
 trap "rm /tmp/$$_* 2> /dev/null ;  exit" 0 1 2 3 15
 
+git pull origin master
+
 for ticker in `cat ./.BancoDados/RelatoriosContabeis | cut -d';' -f1 | sed "s/ //" | sort | uniq  | tr "\n" " "`
 
 do
