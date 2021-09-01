@@ -35,3 +35,4 @@ done
 mv ./.BancoDados/Bc1 ./.BancoDados/RelatoriosContabeis
 
 exit 0
+
