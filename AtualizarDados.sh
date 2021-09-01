@@ -34,5 +34,9 @@ done
 
 mv ./.BancoDados/Bc1 ./.BancoDados/RelatoriosContabeis
 
+git add ./.BancoDados/historicas
+git commit -m `date +%Y%m%d%H%M`
+git push origin master
+
 exit 0
 
