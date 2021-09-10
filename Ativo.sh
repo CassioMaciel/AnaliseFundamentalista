@@ -2,14 +2,14 @@
 
 trap "rm /tmp/$$_* 2> /dev/null ;  exit" 0 1 2 3 15
 
-Ticker=CESP6
+Ticker=TPIS3
 
 echo "Data;Cotacao;VPA;LPA;Roic;Graham;Porcentagem" > /tmp/$$_Ativo.csv
 
 for Data in `cat ./.BancoDados/historicas/$Ticker | cut -d ";" -f 1 | sort | uniq`
 do
-	PatrLiq=`cat ./.BancoDados/historicas/$Ticker | grep ^$Data | sort | uniq | cut -d ";" -f 7`
-	LucroLiq=`cat ./.BancoDados/historicas/$Ticker | grep ^$Data | sort | uniq | cut -d ";" -f 5`
+	PatrLiq=`cat ./.BancoDados/historicas/$Ticker | grep ^$Data | sort | uniq | cut -d ";" -f 5`
+	LucroLiq=`cat ./.BancoDados/historicas/$Ticker | grep ^$Data | sort | uniq | cut -d ";" -f 7`
 	NroAcoes=`cat ./.BancoDados/historicas/$Ticker | grep ^$Data | sort | uniq | cut -d ";" -f 3`
 	Cotacao=`cat ./.BancoDados/historicas/$Ticker | grep ^$Data | sort | uniq | cut -d ";" -f 2`
 	echo "$Data;$Cotacao;=$PatrLiq/$NroAcoes;=$LucroLiq/$NroAcoes" >> /tmp/$$_Ativo.csv
