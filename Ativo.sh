@@ -2,7 +2,7 @@
 
 trap "rm /tmp/$$_* 2> /dev/null ;  exit" 0 1 2 3 15
 
-Ticker=LEVE3
+Ticker=TKNO4
 
 echo "Data;Cotacao;VPA;LPA;Roic;Graham;Porcentagem" > /tmp/$$_Ativo.csv
 
