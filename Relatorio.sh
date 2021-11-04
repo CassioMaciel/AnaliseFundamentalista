@@ -12,6 +12,7 @@ cat ./.BancoDados/RelatoriosContabeis | cut -d ";" -f 8 | sed "1iLucro Liquido" 
 cat ./.BancoDados/RelatoriosContabeis | cut -d ";" -f 12 | sed "1iData do Ultimo Balanço"  > /tmp/$$_UltBalanco
 cat ./.BancoDados/RelatoriosContabeis | cut -d ";" -f 4 | sed "1iNumero de ações" > /tmp/$$_NroAcoes
 cat ./.BancoDados/RelatoriosContabeis | cut -d ";" -f 9 | sed "1iRoic" > /tmp/$$_Roic
+cat ./.BancoDados/RelatoriosContabeis | cut -d ";" -f 13 | sed "1iCrescimento da Receita (5a)" > /tmp/$$_CresReceita
 
 #-------------- Contas na mesma célula ------------------------------------------------------------------------
 
@@ -39,9 +40,13 @@ paste -d "@" /tmp/$$_Ticker /tmp/$$_Preço /tmp/$$_APA /tmp/$$_PPA /tmp/$$_LPA /
 
 paste -d "@" /tmp/$$_Ticker /tmp/$$_Preço /tmp/$$_APA /tmp/$$_PPA /tmp/$$_LPA /tmp/$$_ROA /tmp/$$_PVPA /tmp/$$_PI1 /tmp/$$_PI2 /tmp/$$_Soma /tmp/$$_UltBalanco > /tmp/$$_Geral2.csv
 
+paste -d "@" /tmp/$$_Ticker /tmp/$$_Preço /tmp/$$_APA /tmp/$$_PPA /tmp/$$_LPA /tmp/$$_ROA /tmp/$$_PVPA /tmp/$$_CresReceita /tmp/$$_PI1 /tmp/$$_PI2 /tmp/$$_Soma /tmp/$$_UltBalanco > /tmp/$$_Geral3.csv
+
 unoconv -i FilterOptions=64,34,utf-8,1,1 -f ods  --output './Relatório_ROIC.ods' "/tmp/$$_Geral.csv"
 
 unoconv -i FilterOptions=64,34,utf-8,1,1 -f ods  --output './Relatório_ROA.ods' "/tmp/$$_Geral2.csv"
+
+unoconv -i FilterOptions=64,34,utf-8,1,1 -f ods  --output './Relatório_Growth.ods' "/tmp/$$_Geral3.csv"
 
 #ssconvert --merge-to=all.ods basico.csv basico2.csv 
 
