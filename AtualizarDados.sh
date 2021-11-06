@@ -22,19 +22,20 @@ SubSetor=`cat /tmp/$$_dump_fundamentus | grep "?Subsetor" | sed "s/ *?Vol.*//g" 
 Roic=`cat /tmp/$$_dump_fundamentus | grep "?ROIC" | sed "s/.*?ROIC//g"`
 LastData=`cat /tmp/$$_dump_fundamentus | grep "?Últ balanço processado" | sed "s/.*processado //" | sed "s/ //"`
 ultCot=`cat /tmp/$$_dump_fundamentus | grep "?Data últ cot" | sed "s/.*últ cot //" | sed "s/ //"`
+CrescReceita=`cat /tmp/$$_dump_fundamentus | grep "?Cres. Rec (5a)" | sed "s/.*(5a) //" | sed "s/?Giro Ativos.*$//"`
 
 echo "$ticker"
 
-echo "$ticker;$Papel;$Cotacao;$NroAcoes;$Ativo;$PatrLiq;$LucroTrimestral;$LucroAnual;$Roic;$Setor;$SubSetor;$LastData" | sed "s/ //g" | sed "s/\.//g" >> ./.BancoDados/Bc1
+echo "$ticker;$Papel;$Cotacao;$NroAcoes;$Ativo;$PatrLiq;$LucroTrimestral;$LucroAnual;$Roic;$Setor;$SubSetor;$LastData;$CrescReceita" | sed "s/\.//g" >> /tmp/$$Bc1
 
-echo "$ultCot;$Cotacao;$NroAcoes;$Ativo;$PatrLiq;$LucroTrimestral;$LucroAnual;$Roic;$Setor;$SubSetor;$LastData" | sed "s/ //g" | sed "s/\.//g" >> ./.BancoDados/historicas/$ticker
+echo "$ultCot;$Cotacao;$NroAcoes;$Ativo;$PatrLiq;$LucroTrimestral;$LucroAnual;$Roic;$Setor;$SubSetor;$LastData;$CrescReceita" | sed "s/ //g" | sed "s/\.//g" >> ./.BancoDados/historicas/$ticker
 
 sleep 1
 #read
 
 done
 
-mv ./.BancoDados/Bc1 ./.BancoDados/RelatoriosContabeis
+mv /tmp/$$Bc1 ./.BancoDados/RelatoriosContabeis
 
 git add ./.BancoDados/historicas
 git commit -m `date +%Y%m%d%H%M`
