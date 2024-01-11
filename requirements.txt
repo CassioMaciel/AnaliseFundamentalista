@@ -1,5 +1,6 @@
-beautifulsoup4
-html5lib
-requests
 pandas
 fundamentus
+html5lib
+openpyxl
+datetime
+beautifulsoup4

@@ -1,14 +1,14 @@
 import pandas as pd
-from openpyxl import Workbook,load_workbook
-from icecream import ic
+from openpyxl import Workbook, load_workbook
 from openpyxl.styles import NamedStyle
 from datetime import datetime
 
-dados_fundamentalistas_df = pd.read_csv("./.BancoDados/RelatoriosContabeis",index_col=0)
+dados_fundamentalistas_df = pd.read_csv("./.BancoDados/RelatoriosContabeis",
+                                        index_col=0)
 
 planilha = load_workbook(r"C:\Users\EVKB\OneDrive - PETROBRAS\Documentos\Python\ProgBolsa\ROA.xlsx")
 
-aba_inativa = planilha["Calculos"]
+aba_inativa = planilha["ROA"]
 aba_ativa = planilha["Data_Base"]
 
 aba_ativa[f"A1"] = "Ticker"
@@ -20,7 +20,7 @@ aba_ativa[f"F1"] = "Lucro"
 aba_ativa[f"G1"] = "Ultmo Balanço"
 aba_ativa[f"H1"] = "Volume"
 
-index=2
+index = 2
 
 for ticker in dados_fundamentalistas_df.index:
     linha = index
@@ -35,7 +35,7 @@ for ticker in dados_fundamentalistas_df.index:
 
     index += 1
 
-#TODO: Colocar para salvar o excel em uma pasta escolhida pelo usuario
-#print(dados_fundamentalistas_df.keys())
+# TODO: Colocar para salvar o excel em uma pasta escolhida pelo usuario
+# print(dados_fundamentalistas_df.keys())
 
 planilha.save(r"C:\Users\EVKB\OneDrive - PETROBRAS\Documentos\Python\ProgBolsa\ROA.xlsx")
