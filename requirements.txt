@@ -1,0 +1,6 @@
+pandas
+fundamentus
+html5lib
+openpyxl
+datetime
+beautifulsoup4
