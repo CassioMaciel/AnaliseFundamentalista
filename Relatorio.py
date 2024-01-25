@@ -1,7 +1,7 @@
 import pandas as pd
 from openpyxl import Workbook, load_workbook
-from openpyxl.styles import NamedStyle
 from datetime import datetime
+
 
 dados_fundamentalistas_df = pd.read_csv("./.BancoDados/RelatoriosContabeis",
                                         index_col=0)
@@ -19,6 +19,7 @@ aba_ativa[f"E1"] = "Pat.Liq."
 aba_ativa[f"F1"] = "Lucro"
 aba_ativa[f"G1"] = "Ultmo Balanço"
 aba_ativa[f"H1"] = "Volume"
+aba_ativa[f"I1"] = "Ultima Cotação"
 
 index = 2
 
@@ -32,6 +33,8 @@ for ticker in dados_fundamentalistas_df.index:
     aba_ativa[f"F{linha}"] = dados_fundamentalistas_df.loc[ticker, "Lucro_Liquido_12m"]
     aba_ativa[f"G{linha}"] = datetime.strptime(dados_fundamentalistas_df.loc[ticker, "Ult_balanco_processado"], "%Y-%m-%d")
     aba_ativa[f"H{linha}"] = dados_fundamentalistas_df.loc[ticker, "Vol_med_2m"]
+    aba_ativa[f"I{linha}"] = dados_fundamentalistas_df.loc[ticker,
+    "Data_ult_cot"]
 
     index += 1
 
