@@ -7,9 +7,6 @@ import datetime
 dados_atuais_path = './.BancoDados/RelatoriosContabeis'
 dados_historicos_path = './.BancoDados/historicas'
 
-if os.path.exists("http_cache.sqlite"):
-    os.remove("http_cache.sqlite")
-
 get_resultado = fundamentus.get_resultado()
 
 index = 0
@@ -17,10 +14,13 @@ resultados = pd.DataFrame()
 
 for acao in get_resultado.index:
     print(acao)
+    if os.path.exists("http_cache.sqlite"):
+        os.remove("http_cache.sqlite")
     with warnings.catch_warnings():
         # https://docs.python.org/3/library/warnings.html
         warnings.simplefilter("ignore")
-        resultados = resultados._append(fundamentus.get_papel(acao))
+        resultados_acao = fundamentus.get_papel(acao)
+        resultados = resultados._append(resultados_acao)
     index += index
     print(acao)
 
