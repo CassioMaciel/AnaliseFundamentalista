@@ -4,3 +4,4 @@ html5lib
 openpyxl
 datetime
 beautifulsoup4
+Pyarrow
