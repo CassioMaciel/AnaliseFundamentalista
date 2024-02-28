@@ -25,6 +25,9 @@ aba_ativa[f"F1"] = "Lucro"
 aba_ativa[f"G1"] = "Ultmo Balanço"
 aba_ativa[f"H1"] = "Volume"
 aba_ativa[f"I1"] = "Ultima Cotação"
+aba_ativa[f"J1"] = "Cres. Rec. 5a"
+aba_ativa[f"K1"] = "Ebitda"
+aba_ativa[f"L1"] = "ROIC"
 
 index = 2
 
@@ -71,6 +74,25 @@ for ticker in dados_fundamentalistas_df.index:
             dados_fundamentalistas_df.loc[ticker, "Data_ult_cot"]
 
     index += 1
+
+    cres_rec_5a = dados_fundamentalistas_df.loc[ticker, "Cres_Rec_5a"]
+    if cres_rec_5a != '-':
+        cres_rec_5a = cres_rec_5a.split('%')
+        aba_ativa[f"J{linha}"] = float(cres_rec_5a[0]) / 100
+    else:
+        aba_ativa[f"J{linha}"] = ""
+
+    aba_ativa[f"K{linha}"] = \
+        dados_fundamentalistas_df.loc[ticker, 'EBIT_12m']
+
+    roic = dados_fundamentalistas_df.loc[ticker, 'ROIC']
+    if roic != '-':
+        roic = roic.split('%')
+        aba_ativa[f"L{linha}"] = float(roic[0]) / 100
+    else:
+        aba_ativa[f"L{linha}"] = ""
+
+
 
 # TODO: Colocar para salvar o excel em uma pasta escolhida pelo usuario
 # print(dados_fundamentalistas_df.keys())
