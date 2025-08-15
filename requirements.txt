@@ -5,3 +5,4 @@ openpyxl
 datetime
 beautifulsoup4
 Pyarrow
+yfinance
